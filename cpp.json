@@ -1,0 +1,41 @@
+{
+	// Place your snippets for cpp here. Each snippet is defined under a snippet name and has a prefix, body and 
+	// description. The prefix is what is used to trigger the snippet and the body will be expanded and inserted. Possible variables are:
+	// $1, $2 for tab stops, $0 for the final cursor position, and ${1:label}, ${2:another} for placeholders. Placeholders with the 
+	// same ids are connected.
+	// Example:
+	// "Print to console": {
+	// 	"prefix": "log",
+	// 	"body": [
+	// 		"console.log('$1');",
+	// 		"$2"
+	// 	],
+	// 	"description": "Log output to console"
+	// }
+	"prime_factorization":{
+		"prefix": "prime_factorization",
+		"body":["std::map<long long, long long> primeFactorization(long long n) { /* prime factorization * nを素因数分解する */ std::map<long long, long long> pf; for (long long i = 2; i * i <= n; ++i) { while (n % i == 0) { n /= i; ++pf[i]; } } if (n > 1) { ++pf[n]; } return pf; } "		  
+		],
+		"description": "prime factorization"
+	},
+	"gcd_lcm":{
+		"prefix":"gcd_lcm",
+		"body":"long long gcd(long long a, long long b) { /* the greatest common divisor*/ while (b != 0) { long long r = a % b; a = b; b = r; } return a; } long long lcm(long long a, long long b) { /*the least common multiple*/ return (a / gcd(a, b)) * b; }",
+		"description": "greatest_common_divisor, least_common_multipler"
+	},
+	"sieve_of_eratosthenes":{
+		"prefix":"isPrime",
+		"body": "bool isPrime(int n) { /* returns whether n is prime number or not * n should be in range [0, lim]. * to see detail, search 'Sieve of Eratosthenes' */ static int lim = 1e5; static bool done = false; static vector<bool> isp(lim + 1, 1); if (!done) { isp[0] = isp[1] = false; for (int i = 2; i <= lim; i++) { if (isp[i]) { for (int j = i + i; j <= lim; j += i) { isp[j] = false; } } } done = true; } return isp[n]; } ",
+		"description": "judge prime number or not by sieve of eratosthenes"
+	},
+	"combination_by_pascal_triangle":{
+		"prefix": "combination_by_pascal_triangle",
+		"description": "combination_by_pascal_triangle",
+		"body":"std::vector<std::vector<long long>> combTableByPascalsTriangle(int n) { /*パスカルの三角形を利用した組合せの前計算。O(N^2)。 * arg... *  int n: 組合せ計算したい要素の個数。nCrで指定しうる最大のn * return... *  vector<vector<long long>> c : 組合せ計算nCrの結果がc[n][r]に入っている。 */ auto c = std::vector<std::vector<long long>>( n + 1, std::vector<long long>(n + 1, 0)); for (int i = 0; i <= n; ++i) { for (int j = 0; j <= i; ++j) { if (j == 0 or j == i) { c[i][j] = 1LL; } else { c[i][j] = (c[i - 1][j - 1] + c[i - 1][j]); } } } return c; } "
+	},
+	"modpow":{
+		"prefix": "modpow",
+		"description" : "calculate n^p mod M",
+		"body": "long long modpow(long long n, long long p, long long M) { /* calculate n^p mod M*/ long long ans = 1; for (int i = 0; i < p; ++i) { ans = (ans * n) % M; } return ans; }"
+	}
+}
